@@ -14,4 +14,4 @@ func mutate(query, operation_name):
 		"operationName": operation_name
 	})
 	
-	return await AwsAmplify.api_client.make_authenticated_request(graphql_endpoint, headers, HTTPClient.METHOD_POST, body)
+	return await AWSAmplify.api_client.make_authenticated_request(graphql_endpoint, headers, HTTPClient.METHOD_POST, body)
