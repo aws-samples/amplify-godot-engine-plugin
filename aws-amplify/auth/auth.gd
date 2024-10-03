@@ -1,3 +1,4 @@
+class_name AWSAuth
 extends Node
 
 var auth_token = ''
@@ -22,7 +23,7 @@ func sign_in_with_user_password(email, password):
 		}
 	})
 	
-	var response = await AwsAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
+	var response = await AWSAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
 	var json = response.response_body
 	if json.has("AuthenticationResult") and json.AuthenticationResult.has("AccessToken"):
 		auth_token = json.AuthenticationResult.AccessToken
@@ -55,7 +56,7 @@ func refresh_access_token():
 		}
 	})
 	
-	var response = await AwsAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
+	var response = await AWSAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
 	var json = response.response_body
 	if json.has("AuthenticationResult") and json.AuthenticationResult.has("AccessToken"):
 		auth_token = json.AuthenticationResult.AccessToken
@@ -79,7 +80,7 @@ func get_current_user():
 		"AccessToken": auth_token,
 	})
 
-	var response = await AwsAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
+	var response = await AWSAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
 	var json = response.response_body
 	
 	if json.has("UserAttributes"):

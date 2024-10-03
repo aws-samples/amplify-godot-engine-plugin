@@ -1,3 +1,4 @@
+class_name AWSData
 extends Node
 
 var graphql_endpoint = ''

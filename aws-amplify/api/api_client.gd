@@ -1,12 +1,13 @@
+class_name AWSAPIClient
 extends Node
 
 func make_authenticated_request(endpoint, headers, method, body):
-	var authentication_result = await AwsAmplify.auth.handle_authentication()
+	var authentication_result = await AWSAmplify.auth.handle_authentication()
 	print(authentication_result)
 	if !authentication_result.success:
 		generate_response_json(authentication_result.success, authentication_result.message, 401, null, -1)
 	
-	headers.append("Authorization: Bearer " + AwsAmplify.auth.auth_token)
+	headers.append("Authorization: Bearer " + AWSAmplify.auth.auth_token)
 	return await make_request(endpoint, headers, method, body)
 		
 		

@@ -2,15 +2,22 @@ extends Node
 
 var email = ''
 
-var auth = preload("./auth/auth.gd").new()
-var api_client = preload("./api/api_client.gd").new()
-var data = preload("./data/data.gd").new()
+const AuthClass := preload("./auth/auth.gd")
+const APIClientClass := preload("./api/api_client.gd")
+const DataClass := preload("./data/data.gd")
+
+static var auth: AWSAuth
+static var api_client: AWSAPIClient
+static var data: AWSData
+	
+func _init():
+	auth = AuthClass.new()
+	api_client = APIClientClass.new()
+	data = DataClass.new()
 
 func _ready():
 	
-	add_child(auth)
 	add_child(api_client)
-	add_child(data)
 	
 	var file_path = "res://amplify_outputs.json"
 	var file = FileAccess.open(file_path, FileAccess.READ)
