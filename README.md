@@ -2,8 +2,6 @@
 
 This project contains a Godot Engine plugin to interact with AWS Amplify deployed resources on AWS.
 
-## Wiki
-
 The [Wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains everything you want to know about getting started with AWS Amplify with the Godot Engine.
 
 ## Security
