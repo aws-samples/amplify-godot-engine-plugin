@@ -1,11 +1,10 @@
-## My Project
+## AWS Amplify for Godot Engine - Plugin
 
-TODO: Fill this README out!
+This project contains a Godot Engine plugin to interact with AWS Amplify deployed resources on AWS.
 
-Be sure to:
+## Wiki
 
-* Change the title in this README
-* Edit your repository description on GitHub
+The [Wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains everything you want to know about getting started with AWS Amplify with the Godot Engine.
 
 ## Security
 
@@ -13,7 +12,7 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 
 ## License
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+This library is licensed under the MIT-0 License. See the [LICENSE](LICENSE.md) file.
 
 ## Third Party Licenses
 
