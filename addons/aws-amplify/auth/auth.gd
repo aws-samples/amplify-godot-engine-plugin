@@ -32,12 +32,65 @@ func sign_in_with_user_password(email, password):
 		if !user:
 			return false
 			
-		print("Current User : ", user)
 		current_user = user
 		return true
 	return false
 	
+func sign_up(email, password, options = {}):
+	var headers = [
+		"X-Amz-Target: AWSCognitoIdentityProviderService.SignUp",
+		"Content-Type: application/x-amz-json-1.1"
+	]
 
+	var parameters = {
+		"Username": email,
+		"Password": password,
+		"ClientId": client_id
+	}
+
+	if !options.is_empty() && options.has('userAttributes'):
+		var userAttributes = options.userAttributes
+		var userAttributesArray = []
+
+		for key in userAttributes:
+			userAttributesArray.append({
+					"Name": key,
+					"Value": userAttributes[key]
+			})
+
+		parameters["UserAttributes"] = userAttributesArray
+	
+	var body = JSON.stringify(parameters)
+	
+	var response = await AWSAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
+	if response.success && response.response_code == 200:
+		var json = response.response_body
+		json.success = true
+		return json
+	return { "success": false }
+	
+func confirm_sign_up(email, confirmation_code):
+	
+	var headers = [
+		"X-Amz-Target: AWSCognitoIdentityProviderService.ConfirmSignUp",
+		"Content-Type: application/x-amz-json-1.1"
+	]
+
+	var parameters = {
+		"Username": email,
+		"ClientId": client_id,
+		"ConfirmationCode": confirmation_code
+	}
+
+	var body = JSON.stringify(parameters)
+	
+	var response = await AWSAmplify.api_client.make_request(cognito_endpoint, headers, HTTPClient.METHOD_POST, body)
+	if response.success && response.response_code == 200:
+		var json = response.response_body
+		json.success = true
+		return json
+	return { "success": false }
+	
 func refresh_access_token():
 	
 	if !refresh_token || refresh_token == '':
@@ -87,7 +140,7 @@ func get_current_user():
 		var user_attributes = json.UserAttributes
 		
 		var user = {}
-		for item in user_attributes: #create util function for this?
+		for item in user_attributes: # create util function for this?
 			user[item.Name] = item.Value
 		user.Username = json.Username
 		return user
@@ -128,7 +181,7 @@ func handle_authentication():
 		if !success:
 			return {"success": false, "message": "Couldn't retrieve refresh token"}
 			
-	return {"success": true, "message": "Succesfully retrieved access token"} 
+	return {"success": true, "message": "Succesfully retrieved access token"}
 
 	
 func decode_jwt(token):
