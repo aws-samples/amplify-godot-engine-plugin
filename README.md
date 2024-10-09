@@ -8,7 +8,7 @@ The [wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains ev
 
 ## Discussions
 
-If you have a question or you want to discuss with ther AWs Amplify for Godot Engine users go to the main [discussions](https://github.com/aws-samples/amplify-godot-engine/discussions) channel.
+If you have a question or you want to discuss with the AWS Amplify for Godot Engine community go to the main project [discussions](https://github.com/aws-samples/amplify-godot-engine/discussions) channels.
 
 ## Issues
 
