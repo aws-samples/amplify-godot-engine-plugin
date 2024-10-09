@@ -4,7 +4,15 @@ This project contains a Godot Engine plugin to interact with AWS Amplify deploye
 
 ## Wiki
 
-The [Wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains everything you want to know about getting started with AWS Amplify with the Godot Engine.
+The [wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains everything you want to know about getting started with AWS Amplify with the Godot Engine.
+
+## Discussions
+
+If you have a question or you want to discuss with ther AWs Amplify for Godot Engine users go to the main [discussions](https://github.com/aws-samples/amplify-godot-engine/discussions) channel.
+
+## Issues
+
+If you have any issue with a custom build image [report a bug](https://github.com/aws-samples/amplify-godot-engine-plugin/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=) and if you need a new image or something else  [create a feature request](https://github.com/aws-samples/amplify-godot-engine-plugin/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=).
 
 ## Security
 
