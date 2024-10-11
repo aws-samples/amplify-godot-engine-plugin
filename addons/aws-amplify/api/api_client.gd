@@ -30,6 +30,8 @@ func make_request(endpoint, headers, method, body):
 	if result == HTTPRequest.RESULT_SUCCESS:
 		var json = JSON.parse_string(response_body.get_string_from_utf8())
 		if !json:
+			if response_code >= 200 && response_code < 300:
+				return generate_response_json(true, "Response not in json", response_code, response_headers, result)
 			return generate_response_json(false, "Failed to parse the response body", response_code, response_headers, result)
 		if response_code != 200:
 			return generate_response_json(false, json, response_code, response_headers, result)

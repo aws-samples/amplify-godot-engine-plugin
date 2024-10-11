@@ -31,11 +31,13 @@ func _ready():
 		
 		if parse_result == OK:
 			var result = json.get_data()
-			var auth_data = result["auth"]
-			var region = auth_data["aws_region"]
-			auth.cognito_endpoint = "https://cognito-idp." + region + ".amazonaws.com/"
-			auth.client_id = auth_data["user_pool_client_id"]
-			data.graphql_endpoint = result["data"]["url"]
+			if result.has("auth"):
+				var auth_data = result["auth"]
+				var region = auth_data["aws_region"]
+				auth.cognito_endpoint = "https://cognito-idp." + region + ".amazonaws.com/"
+				auth.client_id = auth_data["user_pool_client_id"]
+			if result.has("data"):
+				data.graphql_endpoint = result["data"]["url"]
 			
 		else:
 			print("Failed to parse JSON")
