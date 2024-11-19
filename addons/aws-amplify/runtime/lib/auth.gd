@@ -322,7 +322,7 @@ func _clear_user_attributes():
 
 func _get_access_token_expiration_time(access_token):
 	var decoded_token = _decode_jwt(access_token)
-	var token_payload = decoded_token.payload
+	var token_payload = decoded_token[JWT.PAYLOAD]
 	return token_payload.exp
 
 func _decode_jwt(token):
@@ -330,15 +330,21 @@ func _decode_jwt(token):
 	
 	assert(parts.size() == 3, "JWT Token must have 3 parts: header, payload and verified signature.")
 	
-	var header_string = Marshalls.base64_to_utf8(parts[0]) # Fix bug and create an issue in godot for base64_to_utf8
-	var header = JSON.parse_string(header_string)
-	var payload_string = Marshalls.base64_to_utf8(parts[1])
-	var payload = JSON.parse_string(payload_string)
-	# var verified_signature_string = Marshalls.base64_to_utf8(parts[2])
-	# var verified_signature = JSON.parse_string(verified_signature_string)
+	var header_byte_array = _base64URL_decode(parts[0])
+	var header = _parse_json(header_byte_array)
+	var payload_string = _base64URL_decode(parts[1])
+	var payload = _parse_json(payload_string)
 	
 	return {
 		JWT.HEADER: header, 
-		JWT.PAYLOAD: payload, 
-		# JWT.VERIFIED_SIGNATURE: verified_signature
+		JWT.PAYLOAD: payload
 	}
+	
+func _base64URL_decode(input: String) -> PackedByteArray:
+	match (input.length() % 4):
+		2: input += "=="
+		3: input += "="
+	return Marshalls.base64_to_raw(input.replacen("_","/").replacen("-","+"))
+
+func _parse_json(field: PackedByteArray) -> Dictionary:
+	return JSON.parse_string(field.get_string_from_utf8())
