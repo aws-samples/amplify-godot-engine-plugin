@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://drygnk7v6ouc3"]
+
+[ext_resource type="Texture2D" uid="uid://c53ekb71gu7cq" path="res://addons/aws-amplify/runtime/icons/eye-slash-solid.svg" id="1_abfi2"]
+[ext_resource type="Texture2D" uid="uid://ciuwy5asywq2b" path="res://addons/aws-amplify/runtime/icons/eye-solid.svg" id="2_4wjss"]
+
+[resource]
+AuthMessage/colors/error_color = Color(1, 0, 0, 1)
+AuthMessage/colors/success_color = Color(0, 1, 0, 1)
+AuthMessage/colors/warn_color = Color(1, 0.647, 0, 1)
+AuthPassword/icons/hide_icon = ExtResource("1_abfi2")
+AuthPassword/icons/show_icon = ExtResource("2_4wjss")

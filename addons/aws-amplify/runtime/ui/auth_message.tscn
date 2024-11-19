@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c6hbejfgf5bld"]
+
+[node name="Label" type="Label"]
+custom_minimum_size = Vector2(200, 0)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+autowrap_mode = 2
