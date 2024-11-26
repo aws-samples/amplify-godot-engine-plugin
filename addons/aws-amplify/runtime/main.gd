@@ -1,73 +1,52 @@
 class_name AWSAmplify
 extends Node
+## Main AWS Amplify class for Godot integration.
+##
+## This class serves as the primary interface for AWS Amplify functionality in Godot projects.
+## It handles configuration loading, client initialization, and manages auth and data modules.
 
-## AWS Amplify SDK
-##
-## Initializes AWS Amplify modules from the generated 'amplify_outputs.json' file.
-## This SDK provides helper methods to interact with AWS Ampify provisionned backend features.
-##
-## Signals:
-##
-##   - auth.user_signed_in
-##   - auth.user_changed
-##   - auth.user_signed_out
-##   - auth.user_signed_up
-## 
-## Methods:
-##
-##   Client:
-##   - client.make_http_get(endpoint, headers, body)
-##   - client.make_http_post(endpoint, headers, body)
-##   - client.make_http_put(endpoint, headers, body)
-##   - client.make_http_delete(endpoint, headers, body)
-##   - client.make_http_request(endpoint, headers, method, body)
-##
-##	 Auth:
-##   - auth.is_user_signed_in()
-##   - auth.get_user_attribute(name, refresh_attributes)
-##   - auth.get_user_attributes(refresh_attributes = false)
-##   - auth.get_user_access_token_expiration_time()
-##   - auth.add_user_attributes(_user_attributes: Dictionary = {})
-##   - auth.remove_user_attributes(keys: Array)
-##   - auth.update_user_attributes(_user_attributes: Dictionary = {})
-##   - auth.refresh_user(refresh_access_token = false, refresh_attributes = false)
-##   - auth.sign_in_with_username_password(username, password, auth_mode: AuthMode = AuthMode.EMAIL)
-##   - auth.forgot_password(email)
-##   - auth.forgot_password_confirm_code(email, confirmation_code, new_password)
-##   - auth.global_sign_out()
-##   - auth.sign_up(email, password, options = {})
-##   - auth.sign_up_confirm_code(email, confirmation_code)
-##   - auth.sign_up_resend_code(email)
-##   - auth.make_authenticated_http_get(endpoint, headers, body)
-##   - auth.make_authenticated_http_post(endpoint, headers, body)
-##   - auth.make_authenticated_http_put(endpoint, headers, body)
-##   - auth.make_authenticated_http_delete(endpoint, headers, body)
-##   - auth.make_authenticated_http_request(endpoint, headers, method, body)
-##
-##	 Data:
-##   - data.make_graphql_query(query, operation_name, authenticated)
-##   - data.make_graphql_mutation(mutation, operation_name, authenticated)
-##   - data.make_graphql_request(query, operation_name, method, authenticated)
-##
-
+## Configuration constants.
 class CONFIG:
+	## Authentication configuration key.
 	const AUTH = "auth"
+	## Data configuration key.
 	const DATA = "data"
 
+## Error message handling class.
 class ERROR:
+	## Generates an error message for a missing module.
+	##
+	## [param name]: The name of the missing module.
+	## [return]: A formatted error message string.
 	static func MODULE_NULL(name):
 		return "No %s module! The %s configuration file doesn't contain an auth section." % name
+	
+	## Error message for missing auth module.
 	var AUTH_NULL = MODULE_NULL(CONFIG.AUTH)
+	## Error message for missing data module.
 	var DATA_NULL = MODULE_NULL(CONFIG.DATA)
 
+## Default path for the Amplify configuration file.
 const DEFAULT_CONFIG_PATH := "res://amplify_outputs.json"
 
+## Path to the current configuration file.
 var config_path: String
+
+## Loaded configuration data.
 var config: Dictionary
+
+## AWS Amplify client instance.
 var client: AWSAmplifyClient
+
+## AWS Amplify authentication module.
 var auth: AWSAmplifyAuth
+
+## AWS Amplify data module.
 var data: AWSAmplifyData
 
+## Initializes the AWSAmplify instance.
+##
+## [param _config_path]: Optional custom path for the configuration file.
 func _init(_config_path = DEFAULT_CONFIG_PATH):
 	config_path = _config_path
 	config = _get_config(_config_path)
@@ -80,6 +59,7 @@ func _init(_config_path = DEFAULT_CONFIG_PATH):
 		if config.has(CONFIG.DATA):
 			data = AWSAmplifyData.new(client, auth, config[CONFIG.DATA])
 
+## Sets up child nodes when the node enters the scene tree.
 func _ready():
 	add_child(client)
 	
@@ -89,6 +69,10 @@ func _ready():
 		if data:
 			add_child(data)
 		
+## Loads and parses the configuration file.
+##
+## [param config_path]: Path to the configuration file.
+## [return]: A dictionary containing the parsed configuration data.
 func _get_config(config_path) -> Dictionary:
 	var file = FileAccess.open(config_path, FileAccess.READ)
 	assert(file != null, "File does not exist: " + config_path)
