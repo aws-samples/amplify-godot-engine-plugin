@@ -16,20 +16,23 @@ key_label = 4194309
 events = [SubResource("InputEventKey_1puki"), SubResource("InputEventKey_uwn0e")]
 
 [node name="AuthForm" type="Control"]
-custom_minimum_size = Vector2(400, 500)
+custom_minimum_size = Vector2(400, 550)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -275.0
+offset_right = 200.0
+offset_bottom = 275.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_dpnkq")
 script = ExtResource("1_7j042")
-metadata/_edit_use_anchors_ = true
 
 [node name="AuthTab" type="TabContainer" parent="."]
 unique_name_in_owner = true
@@ -58,16 +61,16 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Connect to your account"
 
-[node name="SignInEMailPassword" type="VBoxContainer" parent="AuthTab/SignInContainer/SignIn"]
+[node name="SignInUsernamePassword" type="VBoxContainer" parent="AuthTab/SignInContainer/SignIn"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SignInEmailLabel" type="Label" parent="AuthTab/SignInContainer/SignIn/SignInEMailPassword"]
+[node name="SignInUsernameLabel" type="Label" parent="AuthTab/SignInContainer/SignIn/SignInUsernamePassword"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Enter your e-mail address: *"
 
-[node name="SignInEMail" type="LineEdit" parent="AuthTab/SignInContainer/SignIn/SignInEMailPassword"]
+[node name="SignInUsername" type="LineEdit" parent="AuthTab/SignInContainer/SignIn/SignInUsernamePassword"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
@@ -76,26 +79,26 @@ placeholder_text = "Enter your e-mail address"
 virtual_keyboard_type = 5
 caret_blink = true
 
-[node name="SignInPasswordLabel" type="Label" parent="AuthTab/SignInContainer/SignIn/SignInEMailPassword"]
+[node name="SignInPasswordLabel" type="Label" parent="AuthTab/SignInContainer/SignIn/SignInUsernamePassword"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Enter your password: *"
 
-[node name="SignInPasswordContainer" parent="AuthTab/SignInContainer/SignIn/SignInEMailPassword" instance=ExtResource("2_10omg")]
+[node name="SignInPasswordContainer" parent="AuthTab/SignInContainer/SignIn/SignInUsernamePassword" instance=ExtResource("2_10omg")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SignInRememberMeContainer" type="HBoxContainer" parent="AuthTab/SignInContainer/SignIn/SignInEMailPassword"]
+[node name="SignInRememberMeContainer" type="HBoxContainer" parent="AuthTab/SignInContainer/SignIn/SignInUsernamePassword"]
 visible = false
 layout_mode = 2
 
-[node name="SignInRememberMeLabel" type="Label" parent="AuthTab/SignInContainer/SignIn/SignInEMailPassword/SignInRememberMeContainer"]
+[node name="SignInRememberMeLabel" type="Label" parent="AuthTab/SignInContainer/SignIn/SignInUsernamePassword/SignInRememberMeContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 12
 text = "Remember me: "
 
-[node name="SignInRememberMe" type="CheckButton" parent="AuthTab/SignInContainer/SignIn/SignInEMailPassword/SignInRememberMeContainer"]
+[node name="SignInRememberMe" type="CheckButton" parent="AuthTab/SignInContainer/SignIn/SignInUsernamePassword/SignInRememberMeContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -197,10 +200,19 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 autowrap_mode = 2
 script = ExtResource("4_erk2g")
 
-[node name="ForgotPasswordConfirmButton" type="Button" parent="AuthTab/SignInContainer/ForgotPasswordConfirm"]
+[node name="ForgotPasswordButtons" type="HBoxContainer" parent="AuthTab/SignInContainer/ForgotPasswordConfirm"]
+layout_mode = 2
+
+[node name="ForgotPasswordCancelButton" type="Button" parent="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordButtons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Cancel"
+
+[node name="ForgotPasswordConfirmButton" type="Button" parent="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+size_flags_horizontal = 3
 disabled = true
 text = "Confirm"
 
@@ -242,16 +254,16 @@ theme_override_font_sizes/font_size = 12
 text = "Enter an e-mail and a password. You will receive an e-mail with a code to verify your identity."
 autowrap_mode = 2
 
-[node name="SignUpEMailPassword" type="VBoxContainer" parent="AuthTab/SignUpContainer/SignUp"]
+[node name="SignUpUsernamePassword" type="VBoxContainer" parent="AuthTab/SignUpContainer/SignUp"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SignUpEmailLabel" type="Label" parent="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword"]
+[node name="SignUpUsernameLabel" type="Label" parent="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Enter you e-mail address: *"
 
-[node name="SignUpEMail" type="LineEdit" parent="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword"]
+[node name="SignUpUsername" type="LineEdit" parent="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
@@ -259,21 +271,21 @@ size_flags_horizontal = 3
 placeholder_text = "Enter your e-mail address"
 caret_blink = true
 
-[node name="SignUpPasswordLabel" type="Label" parent="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword"]
+[node name="SignUpPasswordLabel" type="Label" parent="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Enter your password: *"
 
-[node name="SignUpPasswordContainer" parent="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword" instance=ExtResource("2_10omg")]
+[node name="SignUpPasswordContainer" parent="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword" instance=ExtResource("2_10omg")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SignUpPasswordConfirmationLabel" type="Label" parent="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword"]
+[node name="SignUpPasswordConfirmationLabel" type="Label" parent="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Confirm your password: *"
 
-[node name="SignUpPasswordConfirmationContainer" parent="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword" instance=ExtResource("2_10omg")]
+[node name="SignUpPasswordConfirmationContainer" parent="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword" instance=ExtResource("2_10omg")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -341,7 +353,7 @@ autowrap_mode = 2
 layout_mode = 2
 text = "Your e-mail: *"
 
-[node name="SignUpConfirmEMail" type="LineEdit" parent="AuthTab/SignUpContainer/SignUpConfirm"]
+[node name="SignUpConfirmUsername" type="LineEdit" parent="AuthTab/SignUpContainer/SignUpConfirm"]
 unique_name_in_owner = true
 layout_mode = 2
 editable = false
@@ -357,10 +369,19 @@ layout_mode = 2
 placeholder_text = "Enter verification code"
 caret_blink = true
 
-[node name="SignUpConfirmButton" type="Button" parent="AuthTab/SignUpContainer/SignUpConfirm"]
+[node name="SignUpButtons" type="HBoxContainer" parent="AuthTab/SignUpContainer/SignUpConfirm"]
+layout_mode = 2
+
+[node name="SignUpCancelButton" type="Button" parent="AuthTab/SignUpContainer/SignUpConfirm/SignUpButtons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Cancel"
+
+[node name="SignUpConfirmButton" type="Button" parent="AuthTab/SignUpContainer/SignUpConfirm/SignUpButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+size_flags_horizontal = 3
 disabled = true
 text = "Confirm"
 
@@ -440,8 +461,8 @@ layout_mode = 2
 text = "Refresh"
 
 [connection signal="visibility_changed" from="AuthTab/SignInContainer/SignIn" to="." method="_on_sign_in_visibility_changed"]
-[connection signal="text_changed" from="AuthTab/SignInContainer/SignIn/SignInEMailPassword/SignInEMail" to="." method="_on_sign_in_input_changed"]
-[connection signal="text_changed" from="AuthTab/SignInContainer/SignIn/SignInEMailPassword/SignInPasswordContainer/Password" to="." method="_on_sign_in_input_changed"]
+[connection signal="text_changed" from="AuthTab/SignInContainer/SignIn/SignInUsernamePassword/SignInUsername" to="." method="_on_sign_in_input_changed"]
+[connection signal="text_changed" from="AuthTab/SignInContainer/SignIn/SignInUsernamePassword/SignInPasswordContainer/Password" to="." method="_on_sign_in_input_changed"]
 [connection signal="pressed" from="AuthTab/SignInContainer/SignIn/SignInButton" to="." method="_on_sign_in_button_pressed"]
 [connection signal="pressed" from="AuthTab/SignInContainer/SignIn/SignInSignUp/SignInSignUpLink" to="." method="_on_sign_in_sign_up_link_pressed"]
 [connection signal="pressed" from="AuthTab/SignInContainer/SignIn/SignInForgotPassword/SignInForgotPasswordLink" to="." method="_forgot_password_confirm_link_pressed"]
@@ -449,25 +470,27 @@ text = "Refresh"
 [connection signal="text_changed" from="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordConfirmCode" to="." method="_on_forgot_password_input_changed"]
 [connection signal="text_changed" from="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordConfirmPasswordContainer/Password" to="." method="_on_forgot_password_input_changed"]
 [connection signal="text_changed" from="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordConfirmPasswordConfirmationContainer/Password" to="." method="_on_forgot_password_input_changed"]
-[connection signal="pressed" from="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordConfirmButton" to="." method="_forgot_password_confirm_button_pressed"]
+[connection signal="pressed" from="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordButtons/ForgotPasswordCancelButton" to="." method="_on_forgot_password_cancel_button_pressed"]
+[connection signal="pressed" from="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordButtons/ForgotPasswordConfirmButton" to="." method="_forgot_password_confirm_button_pressed"]
 [connection signal="pressed" from="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordConfirmSendCode/ForgotPasswordConfirmSendCodeLink" to="." method="_forgot_password_confirm_send_code_link_pressed"]
 [connection signal="visibility_changed" from="AuthTab/SignUpContainer/SignUp" to="." method="_on_sign_up_visibility_changed"]
-[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword/SignUpEMail" to="." method="_on_sign_up_input_changed"]
-[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword/SignUpPasswordContainer/Password" to="." method="_on_sign_up_input_changed"]
-[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword/SignUpPasswordConfirmationContainer/Password" to="." method="_on_sign_up_input_changed"]
+[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword/SignUpUsername" to="." method="_on_sign_up_input_changed"]
+[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword/SignUpPasswordContainer/Password" to="." method="_on_sign_up_input_changed"]
+[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword/SignUpPasswordConfirmationContainer/Password" to="." method="_on_sign_up_input_changed"]
 [connection signal="pressed" from="AuthTab/SignUpContainer/SignUp/SignUpButton" to="." method="_on_sign_up_button_pressed"]
 [connection signal="pressed" from="AuthTab/SignUpContainer/SignUp/SignUpSignIn/SignUpSignInLink" to="." method="_on_sign_up_sign_in_link_pressed"]
 [connection signal="pressed" from="AuthTab/SignUpContainer/SignUp/SignUpConfirmContainer/SignUpConfirmLink" to="." method="_on_sign_up_confirm_link_pressed"]
 [connection signal="visibility_changed" from="AuthTab/SignUpContainer/SignUpConfirm" to="." method="_on_sign_up_confirm_visibility_changed"]
-[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUpConfirm/SignUpConfirmEMail" to="." method="_on_sign_up_confirm_input_changed"]
+[connection signal="text_changed" from="AuthTab/SignUpContainer/SignUpConfirm/SignUpConfirmUsername" to="." method="_on_sign_up_confirm_input_changed"]
 [connection signal="text_changed" from="AuthTab/SignUpContainer/SignUpConfirm/SignUpConfirmCode" to="." method="_on_sign_up_confirm_input_changed"]
-[connection signal="pressed" from="AuthTab/SignUpContainer/SignUpConfirm/SignUpConfirmButton" to="." method="_on_sign_up_confirm_button_pressed"]
+[connection signal="pressed" from="AuthTab/SignUpContainer/SignUpConfirm/SignUpButtons/SignUpCancelButton" to="." method="_on_sign_up_cancel_button_pressed"]
+[connection signal="pressed" from="AuthTab/SignUpContainer/SignUpConfirm/SignUpButtons/SignUpConfirmButton" to="." method="_on_sign_up_confirm_button_pressed"]
 [connection signal="pressed" from="AuthTab/SignUpContainer/SignUpConfirm/SignUpConfirmResendCode/SignUpConfirmResendCodeLink" to="." method="_on_sign_up_confirm_resend_code_link_pressed"]
 [connection signal="pressed" from="SignOut/SignOutButton" to="." method="_on_sign_out_button_pressed"]
 [connection signal="pressed" from="SignOut/SignOutRefresh/SignOutRefreshLink" to="." method="_on_sign_out_refresh_link_pressed"]
 
-[editable path="AuthTab/SignInContainer/SignIn/SignInEMailPassword/SignInPasswordContainer"]
+[editable path="AuthTab/SignInContainer/SignIn/SignInUsernamePassword/SignInPasswordContainer"]
 [editable path="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordConfirmPasswordContainer"]
 [editable path="AuthTab/SignInContainer/ForgotPasswordConfirm/ForgotPasswordConfirmPasswordConfirmationContainer"]
-[editable path="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword/SignUpPasswordContainer"]
-[editable path="AuthTab/SignUpContainer/SignUp/SignUpEMailPassword/SignUpPasswordConfirmationContainer"]
+[editable path="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword/SignUpPasswordContainer"]
+[editable path="AuthTab/SignUpContainer/SignUp/SignUpUsernamePassword/SignUpPasswordConfirmationContainer"]

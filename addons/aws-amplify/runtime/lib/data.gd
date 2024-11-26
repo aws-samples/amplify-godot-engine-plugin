@@ -1,7 +1,7 @@
 class_name AWSAmplifyData
-extends AWSAmplifyBase
+extends Node
 
-class CONFIG:
+class Config:
 	const URL = "url"
 
 enum GraphQLMethod {
@@ -15,16 +15,16 @@ var _auth: AWSAmplifyAuth
 var _config: Dictionary
 var _endpoint: String
 
-func make_graphql_query(operation, operation_name = "MyQuery", authenticated: bool = true):
-	return await make_graphql_request(operation, operation_name, GraphQLMethod.QUERY, authenticated)
+func query(operation, operation_name = "MyQuery", authenticated: bool = true):
+	return await send(operation, operation_name, GraphQLMethod.QUERY, authenticated)
 
-func make_graphql_mutation(operation, operation_name = "MyMutation", authenticated: bool = true):
-	return await make_graphql_request(operation, operation_name, GraphQLMethod.MUTATION, authenticated)
+func mutation(operation, operation_name = "MyMutation", authenticated: bool = true):
+	return await send(operation, operation_name, GraphQLMethod.MUTATION, authenticated)
 
-func make_graphql_subscription(operation, operation_name = "MySubscription", authenticated: bool = true):
-	return await make_graphql_request(operation, operation_name, GraphQLMethod.SUBSCRIPTION, authenticated)
+func subscription(operation, operation_name = "MySubscription", authenticated: bool = true):
+	return await send(operation, operation_name, GraphQLMethod.SUBSCRIPTION, authenticated)
 
-func make_graphql_request(operation, operation_name, method: GraphQLMethod, authenticated: bool = true):
+func send(operation, operation_name, method: GraphQLMethod, authenticated: bool = true):
 	var headers = [ 
 		"Content-Type: application/json"
 	]
@@ -46,12 +46,12 @@ func make_graphql_request(operation, operation_name, method: GraphQLMethod, auth
 	}
 	
 	if authenticated:
-		return await _auth.make_authenticated_http_post(_endpoint, headers, body)
+		return await _auth.post_json(_endpoint, headers, body)
 	else:
-		return await _client.make_http_post(_endpoint, headers, body)
+		return await _client.post_json(_endpoint, headers, body)
 
 func _init(client: AWSAmplifyClient, auth: AWSAmplifyAuth, config: Dictionary) -> void:
 	_client = client
 	_auth = auth
 	_config = config
-	_endpoint = _config[CONFIG.URL]
+	_endpoint = _config[Config.URL]
