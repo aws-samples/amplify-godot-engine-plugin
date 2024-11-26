@@ -8,157 +8,115 @@ The [wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains ev
 
 ## Install the Plugin
 
-Clone the repository and copy the addons folder at the root of your project. 
+Download the plugin
+1. Go to the [GitHub Release Section](https://github.com/aws-samples/amplify-godot-engine-plugin/releases)
+2. Click on the latest release
+3. Download the source code
+4. Extract the plugin code
+5. Copy the addons/aws-amplify folder at the root of your Godot project
 
-Then you can add the autoload for the plugin by in the Godot project settings
-1. Open Project -> Project Settings -> Globals -> Autoload
-2. For path, select aws_amplify.gd (under addons/aws_amplify) 
-3. Change the node name to AWSAmplify
-4. Click Add and make sur the global variable is enabled
+Enable the plugin
+1. Open Project -> Project Settings -> Plugins -> Enabled (AWS Amplify)
+2. The plugin autload the ```aws_amplify``` singleton when enabled
 
-The Plugin is ready to be used
+The AWS Amplify Plugin is ready to be used!
 
-## Authentication
+## Architecture the Plugin
 
-The plugin provides utils functions for authentication, by allowing users to login, and do subsequent authenticated API calls with the `make_authenticated_request` function. 
-Once successfully signed, the plugin will automatically manage the access and refresh token logic.
+The plugin is organized in the same way as the [amplify-js](https://github.com/aws-amplify/amplify-js) client.
+The base class AWSAmplify contains several module, each of them implementing specific features.
+You can access each module from the base class direcly:
 
-### sign_in_with_user_password
+```aws_amplify.client``` will give you access to the client module
 
-```sign_in_with_user_password(email: String, password: String) -> bool```
+## [Client (client)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/client.gd) 
 
+This module offers basic features to send http requests to AWS resources.
 
-Signs in a user with their email and password.
+Here's a list of all the functions with their parameters from the provided AWSAmplifyClient class:
 
-**Input:**
-- `email` (String): User's email address
-- `password` (String): User's password
+### Http Requests (TEXT)
 
-**Output:**
-- `Boolean`: True if sign-in is successful, False otherwise
+You can send http request and receive responses, with plain text bodies:
+- `get_(endpoint: String, headers: Array, body: String)`
+- `post(endpoint: String, headers: Array, body: String)`
+- `put(endpoint: String, headers: Array, body: String)`
+- `delete(endpoint: String, headers: Array, body: String)`
+- `send(endpoint: String, headers: Array, method: HTTPClient.Method, body: String)`
 
-**Description:**
-This function initiates the USER_PASSWORD_AUTH flow with AWS Cognito. It sends the user's credentials and retrieve an access token, refresh token and the user's attributes upon successful authentication. It will then be possible to make authenticated requests.
+### Http Requests (JSON)
 
-### sign_up
+You can send http request and receive responses, with JSON bodies:
+- `get_json(endpoint: String, headers: Array, json_body: Dictionary)`
+- `post_json(endpoint: String, headers: Array, json_body: Dictionary)`
+- `put_json(endpoint: String, headers: Array, json_body: Dictionary)`
+- `delete_json(endpoint: String, headers: Array, body: Dictionary)`
+- `send_json(endpoint: String, headers: Array, method: HTTPClient.Method, json_body: Dictionary)`
 
-```sign_up(email: String, password: String, options: Dictionary = {}) -> Dictionary```
+This module is used in other modules such as ```auth``` and ```data```.
 
-Registers a new user with AWS Cognito.
+## [Authentication (auth)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/auth.gd)
 
-**Input:**
-- `email` (String): User's email address
-- `password` (String): User's password
-- `options` (Dictionary, optional): Additional user attributes
+This module offers authentication features. 
 
-**Output:**
-- `Dictionary`: Contains a 'success' key (Boolean) and additional response data if successful
+### Sign-Up
+- `sign_up(username, password, options: Dictionary = {})`
+- `confirm_sign_up(username: String, confirmation_code: String, options: Dictionary = {})`
+- `resend_sign_up_code(username, options: Dictionary = {})`
 
-**Description:**
-This function registers a new user with AWS Cognito. It can also include additional user attributes if provided in the options dictionary. After sign up, with standard process, users will receive a confirmation code. Confirmation can be send using the `confirm_sign_up` function
+### Sign-In
+- `sign_in(username, password, options: Dictionary = {})`
+- `reset_password(username, options: Dictionary = {})`
+- `confirm_reset_password(username, new_password, confirmation_code, options: Dictionary = {})`
+- `update_password(old_password, new_password, options: Dictionary = {})`
 
-### confirm_sign_up
+### Sign-Out
+- `sign_out(global: bool = false)`
+- `refresh_token(refresh_token)`
 
-```confirm_sign_up(email: String, confirmation_code: String) -> Dictionary```
+### User Attributes
+- `update_user_attributes(user_attributes: Dictionary, options: Dictionary = {})`
+- `update_user_attribute(user_attribute_name: String, user_attribute_value, options: Dictionary = {})`
+- `confirm_user_attribute(attribute_name: String, confirmation_code: String, options: Dictionary = {})`
+- `send_user_attribute_confirmation_code(attribute_name: String, confirmation_code: String, options: Dictionary = {})`
+- `delete_user_attributes(user_attribute_names: Array[String])`
 
-Confirms a user's registration using a confirmation code.
+### Cached variables manipulation (tokens and user attributes)
+- `get_token(name)`
+- `get_user_attribute(name: String, refresh_attributes = false)`
+- `get_user_attributes(refresh_attributes = false)`
+- `add_user_attributes(user_attributes: Dictionary)`
+- `remove_user_attributes(keys: Array)`
+- `refresh_user(refresh_token = false, refresh_user_attributes = false)`
 
-**Input:**
-- `email` (String): User's email address
-- `confirmation_code` (String): Confirmation code sent to the user
+### Authenticated http request (TEXT)
+- `get_(endpoint: String, headers: Array, body: String)`
+- `post(endpoint: String, headers: Array, body: String)`
+- `put(endpoint: String, headers: Array, body: String)`
+- `delete(endpoint: String, headers: Array, body: String)`
+- `send(endpoint: String, headers: Array, method: HTTPClient.Method, body: String)`
 
-**Output:**
-- `Dictionary`: Contains a 'success' key (Boolean) and additional response data if successful
+### Authenticated http request (JSON)
+- `get_json(endpoint: String, headers: Array, json_body: Dictionary)`
+- `post_json(endpoint: String, headers: Array, json_body: Dictionary)`
+- `put_json(endpoint: String, headers: Array, json_body: Dictionary)`
+- `delete_json(endpoint: String, headers: Array, body: Dictionary)`
+- `send_json(endpoint: String, headers: Array, method: HTTPClient.Method, json_body: Dictionary)`
 
-**Description:**
-This function confirms a user's registration in AWS Cognito using the provided confirmation code.
-On success, users will be confirmed and will be able to login.
+## [Data (data)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/data.gd)
 
-## API Client
+This module offers GraphQL features.
 
-A simple an lightweight abstraction layer on top of HTTPRequest node, with built in authentication handling.
+Here's a list of all the functions defined in the AWSAmplifyData class:
 
-### make_authenticated_request
+- `query(operation, operation_name = "MyQuery", authenticated: bool = true)`
+- `mutation(operation, operation_name = "MyMutation", authenticated: bool = true)`
+- `subscription(operation, operation_name = "MySubscription", authenticated: bool = true)`
+- `send(operation, operation_name, method: GraphQLMethod, authenticated: bool = true)`
 
-```make_authenticated_request(endpoint: String, headers: Array, method: HTTPClient.Method, body: String) -> Dictionary```
+## [UI (AuthForm)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/ui/auth_form.gd)
 
-Makes an authenticated HTTP request to the specified endpoint. User should have successfully logged in before usage.
-
-**Input:**
-- `endpoint` (String): The URL to send the request to
-- `headers` (Array): An array of HTTP headers
-- `method` (HTTPClient.Method): The HTTP method to use
-- `body` (String): The request body
-
-**Output:**
-- `Dictionary`: A response object containing success status, response body, response code, headers, and result
-
-**Description:**
-This function first handles authentication using an auth function. If authentication is successful, it adds the authorization header and proceeds to make the HTTP request using the `make_request` function.
-
-### make_request
-
-```make_request(endpoint: String, headers: Array, method: HTTPClient.Method, body: String) -> Dictionary```
-
-Makes an HTTP request to the specified endpoint.
-
-**Input:**
-- `endpoint` (String): The URL to send the request to
-- `headers` (Array): An array of HTTP headers
-- `method` (HTTPClient.Method): The HTTP method to use
-- `body` (String): The request body
-
-**Output:**
-- `Dictionary`: A response object containing success status, response body, response code, headers, and result
-
-**Description:**
-This function creates an HTTPRequest node, sends the request, and processes the response. It handles JSON parsing of the response body and generates a standardized response object using the `generate_response_json` function.
-
-## Data
-
-Simple API to communicate with the AWS Amplify backend persistance data layer, providing functionalities for making GraphQL queries and mutations.
-
-### mutate
-
-```mutate(query: String, operation_name: String) -> Dictionary```
-
-Performs a GraphQL mutation operation.
-
-**Input:**
-- `query` (String): The GraphQL mutation query
-- `operation_name` (String): The name of the mutation operation
-
-**Output:**
-- `Dictionary`: A response object from the `make_authenticated_request` function, containing:
-  - `success` (Boolean): Indicates if the request was successful
-  - `response_body` (Variant): The response body
-  - `response_code` (int): The HTTP response code
-  - `response_headers` (Array): The response headers
-  - `result` (int): The result code from the HTTPRequest
-
-**Description:**
-This function constructs a GraphQL mutation request and sends it to the specified endpoint using the `make_authenticated_request` function. It formats the query with the provided operation name and sends it as a POST request.
-
-### query
-
-```query(query: String, operation_name: String) -> Dictionary```
-
-Performs a GraphQL query operation.
-
-**Input:**
-- `query` (String): The GraphQL query
-- `operation_name` (String): The name of the query operation
-
-**Output:**
-- `Dictionary`: A response object from the `make_authenticated_request` function, containing:
-  - `success` (Boolean): Indicates if the request was successful
-  - `response_body` (Variant): The response body
-  - `response_code` (int): The HTTP response code
-  - `response_headers` (Array): The response headers
-  - `result` (int): The result code from the HTTPRequest
-
-**Description:**
-This function constructs a GraphQL query request and sends it to the specified endpoint using the `make_authenticated_request` function. It formats the query with the provided operation name and sends it as a POST request.
+The plugin offers an various forms to handle authentication flow. 
 
 ## Discussions
 
