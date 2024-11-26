@@ -21,17 +21,17 @@ Enable the plugin
 
 The AWS Amplify Plugin is ready to be used!
 
-## Architecture the Plugin
+## Architecture
 
 The plugin is organized in the same way as the [amplify-js](https://github.com/aws-amplify/amplify-js) client.
 The base class AWSAmplify contains several module, each of them implementing specific features.
-You can access each module from the base class direcly:
+You can access each module from the base class direcly with the global variable ```aws_amplify```.
 
-```aws_amplify.client``` will give you access to the client module
-
-## [Client (client)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/client.gd) 
+## Client (client)
 
 This module offers basic features to send http requests to AWS resources.
+
+You can find the source code [here](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/client.gd).
 
 Here's a list of all the functions with their parameters from the provided AWSAmplifyClient class:
 
@@ -55,9 +55,11 @@ You can send http request and receive responses, with JSON bodies:
 
 This module is used in other modules such as ```auth``` and ```data```.
 
-## [Authentication (auth)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/auth.gd)
+## Authentication (auth)
 
 This module offers authentication features. 
+
+You can find the source code [here](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/auth.gd).
 
 ### Sign-Up
 - `sign_up(username, password, options: Dictionary = {})`
@@ -103,9 +105,11 @@ This module offers authentication features.
 - `delete_json(endpoint: String, headers: Array, body: Dictionary)`
 - `send_json(endpoint: String, headers: Array, method: HTTPClient.Method, json_body: Dictionary)`
 
-## [Data (data)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/data.gd)
+## Data (data)
 
 This module offers GraphQL features.
+
+You can find the source code [here](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/lib/data.gd)
 
 Here's a list of all the functions defined in the AWSAmplifyData class:
 
@@ -114,9 +118,13 @@ Here's a list of all the functions defined in the AWSAmplifyData class:
 - `subscription(operation, operation_name = "MySubscription", authenticated: bool = true)`
 - `send(operation, operation_name, method: GraphQLMethod, authenticated: bool = true)`
 
-## [UI (AuthForm)](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/ui/auth_form.gd)
+## UI (AuthForm)
 
 The plugin offers an various forms to handle authentication flow. 
+
+You can find the source code [here](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/ui/auth_form.gd)
+
+You can find also various samples showing how to use the form [here](https://github.com/aws-samples/amplify-godot-engine-sample/tree/feature/auth_sign_in)
 
 ## Discussions
 
