@@ -1,10 +1,10 @@
-class_name AWSAmplifyData
-extends Node
 ## A class for handling AWS Amplify data operations.
 ##
 ## This class provides methods for performing GraphQL queries, mutations, 
 ## and subscriptions using AWS Amplify. It handles authentication and 
 ## request formatting.
+class_name AWSAmplifyData
+extends Node
 
 ## Performs a GraphQL query operation.
 ##

@@ -1,6 +1,3 @@
-class_name AuthForm
-extends Control
-
 ## Authentication form that handles user sign-in, sign-up, and password reset.
 ##
 ## This script manages the UI and logic for user authentication, including:
@@ -9,7 +6,9 @@ extends Control
 ## - Password reset functionality
 ## - Confirmation of sign-up and password reset
 ##
-## It interacts with the AWSAmplify plugin for backend authentication services.
+## It interacts with the AWSAmplify runtime plugin for backend authentication services.
+class_name AuthForm
+extends Control
 
 const USER_CONFIG_PATH = "user://.config"
 const CONFIG_EMAIL = "email"

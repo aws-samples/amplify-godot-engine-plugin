@@ -1,11 +1,10 @@
-class_name AuthMessage
-extends Label
-
 ## A custom Label for displaying authentication-related messages with color-coding.
 ##
 ## This class extends the Label node to provide specialized functionality for
 ## displaying messages in different colors based on their type (success, warning, error).
 ## It uses theme properties to determine the colors for different message types.
+class_name AuthMessage
+extends Label
 
 ## Sets a regular message without color override.
 ##

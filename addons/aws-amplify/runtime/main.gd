@@ -1,9 +1,9 @@
-class_name AWSAmplify
-extends Node
 ## Main AWS Amplify class for Godot integration.
 ##
 ## This class serves as the primary interface for AWS Amplify functionality in Godot projects.
 ## It handles configuration loading, client initialization, and manages auth and data modules.
+class_name AWSAmplify
+extends Node
 
 ## Configuration constants.
 class CONFIG:

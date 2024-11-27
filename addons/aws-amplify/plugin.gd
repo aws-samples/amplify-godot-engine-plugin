@@ -1,13 +1,17 @@
-@tool
-class_name AWSAmplifyPlugin
-extends EditorPlugin
 ## AWS Amplify plugin for Godot Engine.
 ##
 ## This plugin integrates AWS Amplify functionality into Godot projects,
 ## allowing easy access to AWS backend resources.
 ##
-## @tutorial: https://github.com/aws-samples/amplify-godot-engine-plugin
 ## @tutorial: https://github.com/aws-samples/amplify-godot-engine/wiki
+## @tutorial: https://github.com/aws-samples/amplify-godot-engine-template
+## @tutorial: https://github.com/aws-samples/amplify-godot-engine-custom-build-image
+## @tutorial: https://github.com/aws-samples/amplify-godot-engine-plugin
+## @tutorial: https://github.com/aws-samples/amplify-godot-engine-sample
+
+@tool
+class_name AWSAmplifyPlugin
+extends EditorPlugin
 
 ## Name of the AWS Amplify plugin.
 const AWS_AMPLIFY_PLUGIN_NAME = "AWS Amplify"

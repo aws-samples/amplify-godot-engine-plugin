@@ -1,10 +1,9 @@
-class_name AuthPassword
-extends HBoxContainer
-
 ## A custom password input control with a show/hide toggle button.
 ##
 ## This control combines a LineEdit for password input with a Button
 ## to toggle password visibility. It uses theme icons for the toggle button.
+class_name AuthPassword
+extends HBoxContainer
 
 ## Encapsulates theme-related constants used by AuthPassword.
 class THEME:

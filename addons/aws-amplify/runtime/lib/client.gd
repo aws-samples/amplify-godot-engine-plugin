@@ -1,9 +1,9 @@
-class_name AWSAmplifyClient
-extends Node
 ## AWS Amplify client class for handling HTTP requests.
 ##
 ## This class provides methods for sending HTTP requests to AWS Amplify endpoints
 ## and handling responses.
+class_name AWSAmplifyClient
+extends Node
 
 ## Sends a GET request with JSON body.
 ##
