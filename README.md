@@ -2,9 +2,7 @@
 
 This project contains a Godot Engine plugin to interact with AWS Amplify deployed resources on AWS.
 
-## Wiki
-
-The [wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains everything you want to know about getting started with AWS Amplify with the Godot Engine.
+_Note: “The sample code; software libraries; command line tools; proofs of concept; templates; or other related technology (including any of the foregoing that are provided by our personnel) is provided to you as AWS Content under the AWS Customer Agreement, or the relevant written agreement between you and AWS (whichever applies). You should not use this AWS Content in your production accounts, or on production or other critical data. You are responsible for testing, securing, and optimizing the AWS Content, such as sample code, as appropriate for production grade use based on your specific quality control practices and standards. Deploying AWS Content may incur AWS charges for creating or using AWS chargeable resources, such as running Amazon EC2 instances or using Amazon S3 storage.”_
 
 ## Install the Plugin
 
@@ -125,6 +123,10 @@ The plugin offers an various forms to handle authentication flow.
 You can find the source code [here](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/ui/auth_form.gd)
 
 You can find also various samples showing how to use the form [here](https://github.com/aws-samples/amplify-godot-engine-sample/tree/feature/auth_sign_in)
+
+## Wiki
+
+The [wiki](https://github.com/aws-samples/amplify-godot-engine/wiki) contains everything you want to know about getting started with AWS Amplify with the Godot Engine.
 
 ## Discussions
 
