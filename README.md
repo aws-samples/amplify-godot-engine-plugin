@@ -42,7 +42,7 @@ You can find the source code [here](https://github.com/aws-samples/amplify-godot
 
 Here's a list of all the functions with their parameters from the provided AWSAmplifyClient class:
 
-### Http Requests (TEXT)
+### Http Requests (raw)
 
 You can send http request and receive responses, with plain text bodies:
 - `get_(endpoint: String, headers: Array, body: String)`
@@ -51,7 +51,7 @@ You can send http request and receive responses, with plain text bodies:
 - `delete(endpoint: String, headers: Array, body: String)`
 - `send(endpoint: String, headers: Array, method: HTTPClient.Method, body: String)`
 
-### Http Requests (JSON)
+### Http Requests (json)
 
 You can send http request and receive responses, with JSON bodies:
 - `get_json(endpoint: String, headers: Array, json_body: Dictionary)`
@@ -98,14 +98,14 @@ You can find the source code [here](https://github.com/aws-samples/amplify-godot
 - `remove_user_attributes(keys: Array)`
 - `refresh_user(refresh_token = false, refresh_user_attributes = false)`
 
-### Authenticated http request (TEXT)
+### Authenticated http request (raw)
 - `get_(endpoint: String, headers: Array, body: String)`
 - `post(endpoint: String, headers: Array, body: String)`
 - `put(endpoint: String, headers: Array, body: String)`
 - `delete(endpoint: String, headers: Array, body: String)`
 - `send(endpoint: String, headers: Array, method: HTTPClient.Method, body: String)`
 
-### Authenticated http request (JSON)
+### Authenticated http request (json)
 - `get_json(endpoint: String, headers: Array, json_body: Dictionary)`
 - `post_json(endpoint: String, headers: Array, json_body: Dictionary)`
 - `put_json(endpoint: String, headers: Array, json_body: Dictionary)`
@@ -127,7 +127,7 @@ Here's a list of all the functions defined in the AWSAmplifyData class:
 
 ## UI (AuthForm)
 
-The plugin offers an various forms to handle authentication flow. 
+The plugin offers sign-up, sign-in and sign-out forms to handle various user authentication flows. 
 
 You can find the source code [here](https://github.com/aws-samples/amplify-godot-engine-plugin/blob/main/addons/aws-amplify/runtime/ui/auth_form.gd)
 
